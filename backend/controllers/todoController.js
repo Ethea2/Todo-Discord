@@ -1,6 +1,6 @@
 const Todo = require('../models/todo')
 const Day = require('../models/day')
-const { formatDate, formatDateToReadable } = require('../utils/dateFormat')
+const { formatDate, formatDateToReadable, getPhilippineTime } = require('../utils/dateFormat')
 
 const create_todo = async (req, res) => {
     const { when, what } = req.body;
@@ -61,7 +61,7 @@ const get_todos_sorted = async (req, res) => {
 }
 
 const get_todos_today = async (req, res) => {
-    const todosToday = await Todo.find({ when: formatDate(new Date()) })
+    const todosToday = await Todo.find({ when: formatDate(new Date(getPhilippineTime)) })
     if (!todosToday) return res.status(404).json({ message: "No todos today!" })
     res.status(200).json(todosToday)
 }

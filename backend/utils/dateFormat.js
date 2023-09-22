@@ -12,4 +12,13 @@ function formatDateToReadable(dateString) {
     return date.toLocaleDateString(undefined, options);
 }
 
-module.exports = { formatDate, formatDateToReadable }
+function getPhilippineTime() {
+    const philippineTimeZone = 'Asia/Manila';
+    const now = new Date();
+    const offsetInMillis = now.getTimezoneOffset() * 60 * 1000;
+    const philippineTimeInMillis = now.getTime() + (offsetInMillis + (8 * 60 * 60 * 1000)); // Manila is UTC+8
+  
+    return new Date(philippineTimeInMillis).toLocaleString('en-US', { timeZone: philippineTimeZone });
+  }
+
+module.exports = { formatDate, formatDateToReadable, getPhilippineTime }
