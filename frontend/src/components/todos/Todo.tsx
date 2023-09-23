@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
+import { TodoType } from '../../types/todos'
 
-const Todo = ({ todo }) => {
+const Todo = ({ todo }: { todo: TodoType }): JSX.Element => {
   const [status, setStatus] = useState(todo.status)
 
-  const handleClick = (e) => {
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault()
     status === 'ongoing' ? setStatus('done') : setStatus('ongoing')
     let tempStatus = status
-    tempStatus === 'ongoing' ? tempStatus ='done' : tempStatus = 'ongoing'
+    tempStatus === 'ongoing' ? tempStatus = 'done' : tempStatus = 'ongoing'
     fetch(import.meta.env.VITE_API_URL + '/todo', {
       method: 'PATCH',
       headers: {
@@ -14,7 +16,7 @@ const Todo = ({ todo }) => {
       },
       body: JSON.stringify({
         status: tempStatus,
-        id: todo._id,
+        id: todo._id
       }),
     })
 

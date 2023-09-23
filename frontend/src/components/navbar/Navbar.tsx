@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-const Navbar = () => {
+import React from 'react'
+const Navbar: React.FunctionComponent = () => {
   return (
     <div className='w-full flex justify-center items-start p-10'>
       <div className=" navbar bg-secondary w-[90%] rounded-xl z-10">
