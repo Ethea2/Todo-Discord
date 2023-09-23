@@ -61,16 +61,20 @@ const get_todos_sorted = async (req, res) => {
 }
 
 const get_todos_today = async (req, res) => {
-    const todosToday = await Todo.find({ when: formatDate(new Date(getPhilippineTime())) })
-    if (!todosToday) return res.status(404).json({ message: "No todos today!" })
-    res.status(200).json(todosToday)
+    try {
+        const todosToday = await Todo.find({ when: formatDate(new Date(getPhilippineTime())) })
+        console.log(formatDate(new Date(getPhilippineTime())))
+        console.log(todosToday)
+        if (!todosToday) return res.status(404).json({ message: "No todos today!" })
+        res.status(200).json(todosToday)
+    } catch (error) {
+        res.status(404).json({message: error.message})
+    }
 }
 
 const update_todo = async (req, res) => {
     const { status, id } = req.body
     try {
-        console.log(status)
-        console.log(id)
         const updatedTodo = await Todo.findOneAndUpdate({ _id: id }, { status })
         res.status(200).json(updatedTodo)
     } catch (error) {
