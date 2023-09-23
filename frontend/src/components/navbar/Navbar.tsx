@@ -3,7 +3,7 @@ import React from 'react'
 const Navbar: React.FunctionComponent = () => {
   return (
     <div className='w-full flex justify-center items-start p-10'>
-      <div className=" navbar bg-secondary w-[90%] rounded-xl z-10">
+      <div className=" navbar bg-secondary w-[95%] md:w-[90%] rounded-xl z-10">
         <div className="flex-1">
           <a className="btn btn-ghost normal-case text-xl">Patty's Todos</a>
         </div>
