@@ -62,9 +62,8 @@ const get_todos_sorted = async (req, res) => {
 
 const get_todos_today = async (req, res) => {
     try {
-        const todosToday = await Todo.find({ when: formatDate(new Date(getPhilippineTime())) })
-        console.log(formatDate(new Date(getPhilippineTime())))
-        console.log(todosToday)
+        const todosToday = await Todo.find({ when: formatDate(new Date(new Date().toLocaleString(undefined, 'Asia/Singapore'))) })
+        console.log(formatDate(new Date(new Date().toLocaleString(undefined, 'Asia/Singapore'))))
         if (!todosToday) return res.status(404).json({ message: "No todos today!" })
         res.status(200).json(todosToday)
     } catch (error) {
